@@ -1,6 +1,7 @@
 import { component$, useStore, useStylesScoped$, useServerMount$, useClientEffect$ } from '@builder.io/qwik';
 import { DocumentHead } from '@builder.io/qwik-city';
 import styles from './index.css?inline';
+import ip from 'ip';
 
 export default component$(() => {
   const store : {taskBatch: ITaskBatch | null, cameraVisible: boolean} = useStore({
@@ -66,7 +67,8 @@ const resp = await fetch(`http://localhost:3004/tasks`, {
 const json = await resp.json();
 let res :ITaskBatch | null = null;
 if(Array.isArray(json)){
-  const tasks = json.map((item)=>{return {url: 'http://localhost:5173/' + item +'/instock', name: item}})
+  const localIp = ip.address();
+  const tasks = json.map((item)=>{return {url: `http://${localIp}:5173/` + item +'/instock', name: item}})
   res = {
     tasks: tasks
   }
