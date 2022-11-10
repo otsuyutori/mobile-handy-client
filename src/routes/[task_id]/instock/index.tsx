@@ -9,7 +9,11 @@ export const onGet: RequestHandler<string> = async ({ params }) => {
 
 export default component$(() => {
   const resource = useEndpoint<string>().promise;
-  const store : {tasks: ITask[] | null, cameraVisible : boolean,  value : string} = useStore({tasks: [], cameraVisible: true, value: ''});
+  const store : {tasks: ITask[] | null, cameraVisible : boolean,  value : string} = useStore({
+    tasks: [],
+    cameraVisible: false,
+    value: ''
+  });
   const MsgPipe$ = $((value : string)=>{store.value = value});
   const TurnOff$ = $(()=>{store.cameraVisible = false});
   useServerMount$(async () => {

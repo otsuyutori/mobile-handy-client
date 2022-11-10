@@ -1,7 +1,6 @@
 import { component$, useStore, useStylesScoped$, useServerMount$, useClientEffect$ } from '@builder.io/qwik';
 import { DocumentHead } from '@builder.io/qwik-city';
 import styles from './index.css?inline';
-import Scanner from '../[task_id]/instock/scanner'
 
 export default component$(() => {
   const store : {taskBatch: ITaskBatch | null, cameraVisible: boolean} = useStore({
@@ -32,9 +31,6 @@ export default component$(() => {
             </section>
         </main>
         <footer>
-          {store.cameraVisible === true &&
-          <Scanner/>
-          }
         </footer>
     </>
   );

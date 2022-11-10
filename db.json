@@ -14,5 +14,15 @@
     { "jancode": "123", "qty": 1},
     { "jancode": "345", "qty": 1},
     { "jancode": "678", "qty": 1}
+  ],
+  "task3": [
+    { "jancode": "123", "qty": 1},
+    { "jancode": "345", "qty": 1},
+    { "jancode": "678", "qty": 1}
+  ],
+  "task4": [
+    { "jancode": "123", "qty": 1},
+    { "jancode": "345", "qty": 1},
+    { "jancode": "678", "qty": 1}
   ]
 }
