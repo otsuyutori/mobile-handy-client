@@ -1,0 +1,28 @@
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.instock {
+    font-size:smaller;
+    background-color: lightskyblue;
+    border-radius: 3px;
+    padding: 2px 2px 2px 2px;
+}
+
+.finished {
+    font-size:smaller;
+    background-color: lightgray;
+    border-radius: 3px;
+    padding: 2px 2px 2px 2px;
+}
+
+video{
+    width :100%;
+}
+
+canvas{
+    width: 320px;
+    height: 512px;
+    visibility: hidden  ;
+}

@@ -1,0 +1,18 @@
+{
+  "tasks": [
+    "task1",
+    "task2",
+    "task3",
+    "task4"
+  ],
+  "task1": [
+    { "jancode": "4946841000310", "qty": 10},
+    { "jancode": "345", "qty": 1},
+    { "jancode": "678", "qty": 1}
+  ],
+  "task2": [
+    { "jancode": "123", "qty": 1},
+    { "jancode": "345", "qty": 1},
+    { "jancode": "678", "qty": 1}
+  ]
+}

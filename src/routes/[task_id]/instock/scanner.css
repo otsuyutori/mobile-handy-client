@@ -1,0 +1,9 @@
+video{
+    width :100%;
+}
+
+canvas{
+    width: 320px;
+    height: 512px;
+    visibility: hidden  ;
+}
