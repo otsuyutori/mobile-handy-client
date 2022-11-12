@@ -13,7 +13,7 @@ export default component$(() => {
   });
   useStylesScoped$(styles);
   useClientEffect$(()=>{
-    console.log(store)
+    console.log('find me on client(parent)')
   });
 
   return (
@@ -23,7 +23,7 @@ export default component$(() => {
           title: true,
         }}
         >
-            RMT!
+            RTM!
         </header>
         <main>
             <section>
@@ -49,6 +49,10 @@ export const Tsk = component$((props: {taskBatch: ITaskBatch | null}) => {
     }
   });
 
+  useClientEffect$(()=>{
+    console.log('find me on client(child)');
+  });
+
   return (
     <>
       {store.tasks &&
@@ -61,7 +65,7 @@ export const Tsk = component$((props: {taskBatch: ITaskBatch | null}) => {
 });
 
 export async function getTaskBatch(controller?: AbortController) {
-const resp = await fetch(`http://localhost:3004/tasks`, {
+const resp = await fetch(`http://localhost:5173/api/tasks`, {
   signal: controller?.signal,
 });
 const json = await resp.json();

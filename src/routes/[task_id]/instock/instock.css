@@ -16,6 +16,11 @@
     border-radius: 3px;
     padding: 2px 2px 2px 2px;
 }
+.processing {
+    border: 5px 5px 5px 5px;
+    border-style: dashed;
+    border-color: red;
+}
 
 video{
     width :100%;

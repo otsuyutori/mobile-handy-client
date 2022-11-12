@@ -9,10 +9,11 @@ export const onGet: RequestHandler<string> = async ({ params }) => {
 
 export default component$(() => {
   const resource = useEndpoint<string>().promise;
-  const store : {tasks: ITask[] | null, cameraVisible : boolean,  value : string} = useStore({
+  const store : {tasks: ITask[] | null, cameraVisible : boolean,  value : string, isNumb : boolean} = useStore({
     tasks: [],
     cameraVisible: false,
-    value: ''
+    value: '',
+    isNumb: false,
   });
   const MsgPipe$ = $((value : string)=>{store.value = value});
   const TurnOff$ = $(()=>{store.cameraVisible = false});
@@ -24,13 +25,20 @@ export default component$(() => {
   useClientEffect$(async () => {
   });
 
+  useStylesScoped$(styles);
+
   useWatch$(({track})=>{
     track(() => store.value);
-    console.log(store.value);
-    if(store.tasks){
+    if(store.tasks && !store.isNumb){
       for(const task of store.tasks){
         if(task.jancode == store.value && task.qty > task.checked){
           task.checked++;
+          store.isNumb = true;
+          setTimeout(() => {
+            store.isNumb = false;
+            console.log('reset');
+            console.log(store);
+          }, 2000);
         }
       }
     }
@@ -46,7 +54,9 @@ export default component$(() => {
         <Tasks store={store} />
         {store.value}<br />
         {store.cameraVisible
-          ?<Scanner MsgPipe$={MsgPipe$} TurnOff$={TurnOff$}/>
+          ?<div class={store.isNumb ? 'processing' : ''}>
+            <Scanner MsgPipe$={MsgPipe$} TurnOff$={TurnOff$}/>
+          </div>
           :<button onClick$={()=>{store.cameraVisible = true}}>ON</button>
         }
       </>
@@ -55,7 +65,7 @@ export default component$(() => {
 
 export async function getTask(taskId : any, controller?: AbortController) {
   const taskIdStr : string = await taskId;
-  const resp = await fetch(`http://localhost:3004/${taskIdStr}`, {
+  const resp = await fetch(`http://localhost:5173/api/tasks/${taskIdStr}`, {
     signal: controller?.signal,
   });
   const json = await resp.json();
@@ -74,7 +84,7 @@ export const Tasks = component$((props: { store: any }) => {
   return (
       <>
         {props.store.tasks &&
-        props.store.tasks.map((task : ITask) => {return (
+         props.store.tasks.map((task : ITask) => {return (
           <div>
             {task.qty !== task.checked
               ?<div class="row">

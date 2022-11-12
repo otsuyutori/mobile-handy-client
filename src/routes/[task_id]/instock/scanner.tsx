@@ -7,7 +7,7 @@ export default component$((props : {MsgPipe$ : PropFunction<(value:string) => vo
   const canvasRef = useRef<HTMLCanvasElement>();
   const videoRef = useRef<HTMLVideoElement>();
   const turnOffCamera = $(() =>{
-    videoRef.current?.srcObject?.getVideoTracks().forEach((track : any) => {
+    (videoRef.current?.srcObject as MediaStream).getVideoTracks().forEach((track : any) => {
       track.stop();
     });
   });
@@ -21,7 +21,6 @@ export default component$((props : {MsgPipe$ : PropFunction<(value:string) => vo
           .getUserMedia({
             audio: false,
             video:
-              // true
               {
                 facingMode: "environment",
                 width: width,
@@ -50,8 +49,8 @@ export default component$((props : {MsgPipe$ : PropFunction<(value:string) => vo
             }
             canvasRef.current.width = vWidth;
             canvasRef.current.height = vHeight;
-            context.drawImage(videoRef.current,0,0,vWidth, vHeight);
-            const imgData = context.getImageData(0, 0,vWidth, vHeight);
+            context.drawImage(videoRef.current, 0, 0 , vWidth, vHeight);
+            const imgData = context.getImageData(0, 0, vWidth, vHeight);
             return imgData;
           }
         }
